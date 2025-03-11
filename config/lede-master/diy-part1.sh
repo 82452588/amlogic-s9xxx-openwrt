@@ -12,5 +12,5 @@
 # sed -i '3s/^/#/' feeds.conf.default
 sed -i '6s/^#//' feeds.conf.default
 # other
-# rm -rf package/lean/{samba4,luci-app-samba4,luci-app-ttyd}
+rm -rf package/lean/{luci-app-frpc,luci-app-frps,luci-app-openvpn}
 
