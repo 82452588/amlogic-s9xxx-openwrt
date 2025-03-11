@@ -8,9 +8,9 @@
 
 # Add a feed source
 # sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
-# sed -i '2s/^#//;6s/^#//' feeds.conf.default
-# sed -i '3s/^/#/' feeds.conf.default
-sed -i '6s/^#//' feeds.conf.default
+sed -i '2s/^#//;6s/^#//' feeds.conf.default
+sed -i '3s/^/#/' feeds.conf.default
+# sed -i '6s/^#//' feeds.conf.default
 # other
 rm -rf package/lean/{luci-app-frpc,luci-app-frps,luci-app-openvpn}
 
