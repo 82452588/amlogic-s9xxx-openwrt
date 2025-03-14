@@ -176,7 +176,7 @@ on:
       openwrt_kernel:
         description: "Select kernel version"
         required: false
-        default: "6.1.y_6.12.y"
+        default: "5.10.y"
         type: choice
         options:
           - 5.4.y
@@ -202,6 +202,7 @@ on:
         type: choice
         options:
           - ophub/kernel
+          - 82452588/kernel
       kernel_usage:
         description: "Set the tags of the stable kernel."
         required: false
@@ -228,7 +229,7 @@ on:
         options:
           - ophub
           - angel
-          - yourname
+          - Jed
 
 env:
   FEEDS_CONF: config/${{ inputs.source_branch }}/feeds.conf.default
