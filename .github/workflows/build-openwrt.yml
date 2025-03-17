@@ -198,7 +198,7 @@ on:
       kernel_repo:
         description: "Set the kernel repository"
         required: false
-        default: "ophub/kernel"
+        default: "82452588/kernel"
         type: choice
         options:
           - ophub/kernel
@@ -224,7 +224,7 @@ on:
       builder_name:
         description: "Set OpenWrt builder signature."
         required: false
-        default: "ophub"
+        default: "Jed"
         type: choice
         options:
           - ophub
