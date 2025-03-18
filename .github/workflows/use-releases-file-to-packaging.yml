@@ -309,6 +309,7 @@ jobs:
 
           armvirt_tarfile_path="openwrt/output"
           [[ -d "${armvirt_tarfile_path}" ]] || mkdir -p ${armvirt_tarfile_path}
+          mkdir -p /builder/openwrt /home/runner/work/_actions/82452588/amlogic-s9xxx-openwrt/main/openwrt
           ln -sf /builder/openwrt ${GITHUB_WORKSPACE}/openwrt
           ln -sf /builder/openwrt /home/runner/work/_actions/82452588/amlogic-s9xxx-openwrt/main/openwrt
 
