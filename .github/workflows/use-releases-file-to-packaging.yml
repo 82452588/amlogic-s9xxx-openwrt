@@ -338,7 +338,17 @@ jobs:
           echo "REPO_URL=${REPO_URL}" >> ${GITHUB_OUTPUT}
           echo "TAGS_NAME=${TAGS_NAME}" >> ${GITHUB_OUTPUT}
           echo "status=success" >> ${GITHUB_OUTPUT}
-
+      - name: Download and extract kernel files
+        if: ${{ steps.clean.outputs.status }} == 'success' && !cancelled()
+        run: |
+          # 下载内核文件
+          mkdir -p kernel_files
+          cd kernel_files
+          wget https://github.com/82452588/kernel/releases/download/kernel_rk35xx/6.1.160.tar.gz
+          # 解压内核文件
+          tar -zxvf 6.1.160.tar.gz
+          # 打印解压后的文件列表，方便调试
+          ls -l
       - name: Packaging OpenWrt
         if: ${{ steps.down.outputs.status }} == 'success' && !cancelled()
         uses: 82452588/amlogic-s9xxx-openwrt@main
@@ -350,7 +360,8 @@ jobs:
           kernel_repo: ${{ inputs.kernel_repo }}
           kernel_usage: ${{ inputs.kernel_usage }}
           builder_name: ${{ inputs.builder_name }}
-
+          # 传递内核文件路径
+          kernel_path: kernel_files
       - name: Upload the packaged OpenWrt
         uses: ncipollo/release-action@main
         if: ${{ env.PACKAGED_STATUS }} == 'success' && !cancelled()
@@ -363,11 +374,12 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
             ### OpenWrt Image information
-            - Default IP: 192.168.1.1
+            - Default IP: 192.168.15.1
             - Default username: root
             - Default password: password
-            - Default WIFI name: OpenWrt
+            - Default WIFI name: LEDE
             - Default WIFI password: none
+            - Default APP: N2N,SSR PLUSS, NPS, SAMBA, DOCKER, USB Printer 
             ### Install to EMMC
             - Login to OpenWrt → System → Amlogic Service → Install OpenWrt
             ### OpenWrt source code
