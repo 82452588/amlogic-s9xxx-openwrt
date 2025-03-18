@@ -338,20 +338,9 @@ jobs:
           echo "REPO_URL=${REPO_URL}" >> ${GITHUB_OUTPUT}
           echo "TAGS_NAME=${TAGS_NAME}" >> ${GITHUB_OUTPUT}
           echo "status=success" >> ${GITHUB_OUTPUT}
-      - name: Download and extract kernel files
-        if: ${{ steps.clean.outputs.status }} == 'success' && !cancelled()
-        run: |
-          # 下载内核文件
-          mkdir -p kernel_files
-          cd kernel_files
-          wget https://github.com/82452588/kernel/releases/download/kernel_rk35xx/6.1.160.tar.gz
-          # 解压内核文件
-          tar -zxvf 6.1.160.tar.gz
-          # 打印解压后的文件列表，方便调试
-          ls -l
       - name: Packaging OpenWrt
         if: ${{ steps.down.outputs.status }} == 'success' && !cancelled()
-        uses: 82452588/amlogic-s9xxx-openwrt@main
+        uses: ophub/amlogic-s9xxx-openwrt@main
         with:
           openwrt_path: openwrt/output/*rootfs.tar.gz
           openwrt_board: ${{ inputs.openwrt_board }}
@@ -360,8 +349,6 @@ jobs:
           kernel_repo: ${{ inputs.kernel_repo }}
           kernel_usage: ${{ inputs.kernel_usage }}
           builder_name: ${{ inputs.builder_name }}
-          # 传递内核文件路径
-          kernel_path: kernel_files
       - name: Upload the packaged OpenWrt
         uses: ncipollo/release-action@main
         if: ${{ env.PACKAGED_STATUS }} == 'success' && !cancelled()
