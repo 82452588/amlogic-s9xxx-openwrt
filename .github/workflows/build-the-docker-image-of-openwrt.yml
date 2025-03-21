@@ -27,6 +27,7 @@ on:
         type: choice
         options:
           - lckfb/openwrt-aarch64:latest
+          - lckfb/openwrt-aarch64:lede
 
 env:
   TZ: America/New_York
