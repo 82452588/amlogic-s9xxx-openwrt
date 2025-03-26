@@ -5,7 +5,7 @@ inputs:
   mode:
     description: "Select script."
     required: false
-    default: "82452588"
+    default: "ophub"
   openwrt_path:
     description: "Select armvirt64 file path."
     required: false
@@ -17,7 +17,7 @@ inputs:
   kernel_repo:
     description: "Select kernel repository."
     required: false
-    default: "82452588/kernel"
+    default: "ophub/kernel"
   kernel_usage:
     description: "Set the tags of the stable kernel."
     required: false
@@ -25,7 +25,7 @@ inputs:
   openwrt_kernel:
     description: "Select kernel version."
     required: false
-    default: "5.10.160"
+    default: "6.1.y_6.12.y"
   auto_kernel:
     description: "Auto use the latest kernel."
     required: false
