@@ -572,12 +572,9 @@ download_kernel() {
                 fi
 
                 # If the kernel contains the sha256sums file, check the files integrity
-                echo "DEBUG: $(ls /home/runner/work/_actions/82452588/amlogic-s9xxx-openwrt/main/make-openwrt/kernel/rk35xx/)"
-                echo "DEBUG: $(ls /home/runner/work/_actions/82452588/amlogic-s9xxx-openwrt/main/make-openwrt/kernel/rk35xx/${key})"
                 echo "DEBUG: $(ls /home/runner/work/_actions/82452588/amlogic-s9xxx-openwrt/main/make-openwrt/kernel/${key})"
                 ls -ld "${kernel_path}/${key}/${kernel_var}/sha256sums"
                 ls -ld "${kernel_path}/${key}/${kernel_var}"
-                ls -ld "${kernel_path}/${key}/${kernel_var}/${kernel_var}"
                 check_kernel "${kernel_path}/${key}/${kernel_var}"
                 [[ -f "${kernel_path}/${key}/${kernel_var}/sha256sums" ]] && check_kernel "${kernel_path}/${key}/${kernel_var}"
 
