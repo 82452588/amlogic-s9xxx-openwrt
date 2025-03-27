@@ -365,6 +365,7 @@ check_data() {
 
 find_openwrt() {
     cd ${current_path}
+    echo "DEBUG: current_path = ${current_path}"
     echo -e "${STEPS} Start searching for OpenWrt file..."
 
     # Find whether the OpenWrt file exists
@@ -422,6 +423,7 @@ git_pull_dir() {
 
 download_depends() {
     cd ${current_path}
+    echo "DEBUG: current_path = ${current_path}"
     echo -e "${STEPS} Start downloading dependency files..."
 
     # Download Armbian u-boot files
@@ -539,6 +541,7 @@ check_kernel() {
 
 download_kernel() {
     cd ${current_path}
+    echo "DEBUG: current_path = ${current_path}"
     echo -e "${STEPS} Start downloading the kernel files..."
 
     x="1"
@@ -584,7 +587,7 @@ download_kernel() {
 
 confirm_version() {
     cd ${current_path}
-
+    echo "DEBUG: current_path = ${current_path}"
     # Columns of ${model_conf}:
     # 1.ID  2.MODEL  3.SOC  4.FDTFILE  5.UBOOT_OVERLOAD  6.MAINLINE_UBOOT  7.BOOTLOADER_IMG  8.DESCRIPTION
     # 9.KERNEL_TAGS  10.PLATFORM  11.FAMILY  12.BOOT_CONF  13.CONTRIBUTORS  14.BOARD  15.BUILD
@@ -660,7 +663,7 @@ confirm_version() {
 make_image() {
     process_msg "(1/6) Make OpenWrt image."
     cd ${current_path}
-
+    echo "DEBUG: current_path = ${current_path}"
     # Set Armbian image file parameters
     [[ "${PLATFORM}" == "amlogic" ]] && {
         skip_mb="4"
@@ -767,7 +770,7 @@ make_image() {
 extract_openwrt() {
     process_msg "(2/6) Extract OpenWrt files."
     cd ${current_path}
-
+    echo "DEBUG: current_path = ${current_path}"
     # Create a dual-partition general directory
     tag_bootfs="${tmp_path}/${kernel}/${board}/bootfs"
     tag_rootfs="${tmp_path}/${kernel}/${board}/rootfs"
@@ -830,13 +833,9 @@ extract_openwrt() {
 replace_kernel() {
     process_msg "(3/6) Replace the kernel."
     cd ${current_path}
-
+    echo "DEBUG: current_path = ${current_path}"
     # Determine custom kernel filename
     kernel_boot="$(ls ${kernel_path}/${conf_kernel_tags}/${kernel}/boot-${kernel}*.tar.gz 2>/dev/null | head -n 1)"
-    kernel_name="5.10.160-Jed"
-    [[ -n "${kernel_name}" ]] || error_msg "Missing kernel files for [ ${kernel} ]"
-    kernel_dtb="${kernel_path}/${conf_kernel_tags}/${kernel}/dtb-${PLATFORM}-${kernel_name}.tar.gz"
-    kernel_modules="${kernel_path}/${conf_kernel_tags}/${kernel}/modules-${kernel_name}.tar.gz"
     echo "DEBUG: kernel_path = ${kernel_path}"
     echo "DEBUG: conf_kernel_tags = ${conf_kernel_tags}"
     echo "DEBUG: kernel = ${kernel}"
@@ -845,9 +844,9 @@ replace_kernel() {
     echo "DEBUG: kernel_boot = ${kernel_boot}"
     echo "DEBUG: kernel_dtb = ${kernel_dtb}"
     echo "DEBUG: kernel_modules = ${kernel_modules}"
-    ls -l ${kernel_path}/${conf_kernel_tags}/${kernel}/boot-${kernel}-${kernel_name}.tar.gz
-    ls -l ${kernel_path}/${conf_kernel_tags}/${kernel}/dtb-${PLATFORM}-${kernel_name}.tar.gz
-    ls -l ${kernel_path}/${conf_kernel_tags}/${kernel}/modules-${kernel_name}.tar.gz
+    [[ -n "${kernel_name}" ]] || error_msg "Missing kernel files for [ ${kernel} ]"
+    kernel_dtb="${kernel_path}/${conf_kernel_tags}/${kernel}/dtb-${PLATFORM}-${kernel_name}.tar.gz"
+    kernel_modules="${kernel_path}/${conf_kernel_tags}/${kernel}/modules-${kernel_name}.tar.gz"
     [[ -s "${kernel_boot}" && -s "${kernel_dtb}" && -s "${kernel_modules}" ]] || error_msg "The 3 kernel missing."
 
     # 01. For /boot five files
