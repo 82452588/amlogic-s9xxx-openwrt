@@ -181,12 +181,10 @@ on:
         options:
           - 5.4.y
           - 5.10.y
-          - 5.10.160
           - 5.15.y
           - 6.1.y
           - 6.6.y
           - 6.12.y
-          - 5.10.y_6.1.y
           - 5.4.y_5.10.y
           - 5.15.y_6.1.y
           - 6.1.y_6.12.y
@@ -231,7 +229,6 @@ on:
         options:
           - ophub
           - angel
-          - yourname
           - Jed
 
 env:
@@ -311,8 +308,6 @@ jobs:
 
           armvirt_tarfile_path="openwrt/output"
           [[ -d "${armvirt_tarfile_path}" ]] || mkdir -p ${armvirt_tarfile_path}
-          mkdir -p  ${GITHUB_WORKSPACE}/openwrt
-          mkdir -p /home/runner/work/_actions/82452588/amlogic-s9xxx-openwrt/main/openwrt
           ln -sf /builder/openwrt ${GITHUB_WORKSPACE}/openwrt
           ln -sf /builder/openwrt /home/runner/work/_actions/82452588/amlogic-s9xxx-openwrt/main/openwrt
 
@@ -342,6 +337,7 @@ jobs:
           echo "REPO_URL=${REPO_URL}" >> ${GITHUB_OUTPUT}
           echo "TAGS_NAME=${TAGS_NAME}" >> ${GITHUB_OUTPUT}
           echo "status=success" >> ${GITHUB_OUTPUT}
+
       - name: Packaging OpenWrt
         if: ${{ steps.down.outputs.status }} == 'success' && !cancelled()
         uses: 82452588/amlogic-s9xxx-openwrt@main
@@ -353,6 +349,7 @@ jobs:
           kernel_repo: ${{ inputs.kernel_repo }}
           kernel_usage: ${{ inputs.kernel_usage }}
           builder_name: ${{ inputs.builder_name }}
+
       - name: Upload the packaged OpenWrt
         uses: ncipollo/release-action@main
         if: ${{ env.PACKAGED_STATUS }} == 'success' && !cancelled()
@@ -365,12 +362,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
             ### OpenWrt Image information
-            - Default IP: 192.168.15.1
+            - Default IP: 192.168.1.1
             - Default username: root
             - Default password: password
-            - Default WIFI name: LEDE
+            - Default WIFI name: OpenWrt
             - Default WIFI password: none
-            - Default APP: N2N,SSR PLUSS, NPS, SAMBA, DOCKER, USB Printer 
             ### Install to EMMC
             - Login to OpenWrt → System → Amlogic Service → Install OpenWrt
             ### OpenWrt source code
