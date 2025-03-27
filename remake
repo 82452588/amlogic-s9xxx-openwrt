@@ -841,6 +841,7 @@ replace_kernel() {
     echo "DEBUG: current_path = ${current_path}"
     # Determine custom kernel filename
     kernel_boot="$(ls ${kernel_path}/${conf_kernel_tags}/${kernel}/boot-${kernel}*.tar.gz 2>/dev/null | head -n 1)"
+    kernel_name="${kernel_boot##*/}" && kernel_name="${kernel_name:5:-7}"
     echo "DEBUG: kernel_path = ${kernel_path}"
     echo "DEBUG: conf_kernel_tags = ${conf_kernel_tags}"
     echo "DEBUG: kernel = ${kernel}"
