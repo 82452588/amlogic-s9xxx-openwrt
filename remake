@@ -837,6 +837,17 @@ replace_kernel() {
     [[ -n "${kernel_name}" ]] || error_msg "Missing kernel files for [ ${kernel} ]"
     kernel_dtb="${kernel_path}/${conf_kernel_tags}/${kernel}/dtb-${PLATFORM}-${kernel_name}.tar.gz"
     kernel_modules="${kernel_path}/${conf_kernel_tags}/${kernel}/modules-${kernel_name}.tar.gz"
+    echo "DEBUG: kernel_path = ${kernel_path}"
+    echo "DEBUG: conf_kernel_tags = ${conf_kernel_tags}"
+    echo "DEBUG: kernel = ${kernel}"
+    echo "DEBUG: PLATFORM = ${PLATFORM}"
+    echo "DEBUG: kernel_name = ${kernel_name}"
+    echo "DEBUG: kernel_boot = ${kernel_boot}"
+    echo "DEBUG: kernel_dtb = ${kernel_dtb}"
+    echo "DEBUG: kernel_modules = ${kernel_modules}"
+    ls -l ${kernel_path}/${conf_kernel_tags}/${kernel}/boot-${kernel}-${kernel_name}.tar.gz
+    ls -l ${kernel_path}/${conf_kernel_tags}/${kernel}/dtb-${PLATFORM}-${kernel_name}.tar.gz
+    ls -l ${kernel_path}/${conf_kernel_tags}/${kernel}/modules-${kernel_name}.tar.gz
     [[ -s "${kernel_boot}" && -s "${kernel_dtb}" && -s "${kernel_modules}" ]] || error_msg "The 3 kernel missing."
 
     # 01. For /boot five files
