@@ -833,7 +833,7 @@ replace_kernel() {
 
     # Determine custom kernel filename
     kernel_boot="$(ls ${kernel_path}/${conf_kernel_tags}/${kernel}/boot-${kernel}*.tar.gz 2>/dev/null | head -n 1)"
-    kernel_name="${kernel_boot##*/}" && kernel_name="${kernel_name:5:-7}"
+    kernel_name="5.10.160-Jed"
     [[ -n "${kernel_name}" ]] || error_msg "Missing kernel files for [ ${kernel} ]"
     kernel_dtb="${kernel_path}/${conf_kernel_tags}/${kernel}/dtb-${PLATFORM}-${kernel_name}.tar.gz"
     kernel_modules="${kernel_path}/${conf_kernel_tags}/${kernel}/modules-${kernel_name}.tar.gz"
