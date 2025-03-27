@@ -573,7 +573,8 @@ download_kernel() {
 
                 # If the kernel contains the sha256sums file, check the files integrity
                 ls -ld "${kernel_path}/${key}/${kernel_var}/sha256sums"
-                ls -ld "${kernel_path}/${key}/${kernel_var}/sha256sums"
+                ls -ld "${kernel_path}/${key}/${kernel_var}"
+                ls -ld "${kernel_path}/${key}/${kernel_var}/${kernel_var}"
                 check_kernel "${kernel_path}/${key}/${kernel_var}"
                 [[ -f "${kernel_path}/${key}/${kernel_var}/sha256sums" ]] && check_kernel "${kernel_path}/${key}/${kernel_var}"
 
