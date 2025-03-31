@@ -368,7 +368,7 @@ jobs:
             - Default password: password
             - Default WIFI name: LEDE
             - Default WIFI password: none
-            - Default APP: SSR PLUS/N2N V3.0/NPC/USB Printer/Samba/Docker etc
+            - Default APP: SSR PLUS/N2N V3.0/NPS/Rclone/KMS/USB Printer/Samba/Docker/ftp/ etc
             ### Install to EMMC
             - Login to OpenWrt → System → Amlogic Service → Install OpenWrt
             ### OpenWrt source code
